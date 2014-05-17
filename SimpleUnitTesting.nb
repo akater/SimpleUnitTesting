@@ -1,0 +1,840 @@
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Simple Unit Testing", "Title",
+ Deletable->False,
+ ShowCellBracket->False,
+ Deployed->True,
+ CellTags->"PluckTitle",
+ Plucks`Private`InitializationGroup -> True],
+
+Cell["v14.05.17 (latest review by maintainer)", "Subsubtitle",
+ ShowCellBracket->False,
+ CellTags->"MaintainerReviewDate"],
+
+Cell["\<\
+Akater
+nuclearspace@gmail.com\
+\>", "Text",
+ Deletable->False,
+ ShowCellBracket->False,
+ CellTags->"MaintainerInfo"],
+
+Cell["No licensing. Use the contents in any way you want to. WTFPL", "Text",
+ ShowCellBracket->False,
+ CellTags->"LicenseNote"],
+
+Cell[CellGroupData[{
+
+Cell["Overview", "Subsection",
+ CellTags->"Overview",
+ Plucks`Private`InitializationGroup -> True],
+
+Cell[TextData[{
+ "Create ",
+ StyleBox["SimpleUnitTestingTesting",
+  FontSlant->"Italic"],
+ " directory in ",
+ StyleBox["Applications",
+  FontSlant->"Italic"],
+ ", put SuperCalculations.mt file into ",
+ StyleBox["Tests",
+  FontSlant->"Italic"],
+ " subdirectory, and run TestMyApp@\[CloseCurlyDoubleQuote]SuperCalculations\
+\[CloseCurlyDoubleQuote]. Or jut execute ",
+ StyleBox["QuickExampleInstall",
+  FontSlant->"Italic"],
+ " and go to Examples section.\n\nTest files were meant to be compatible with \
+Workbench .mt ones."
+}], "Text",
+ Plucks`Private`InitializationGroup -> True]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Credits", "Subsection",
+ CellTags->"Credits",
+ Plucks`Private`InitializationGroup -> True],
+
+Cell[TextData[{
+ "No contributors but the maintainer. This package would never see the light \
+of the day if not for all the wonderful people at and behind ",
+ ButtonBox["mma.sx",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://mathematica.stackexchange.com"], None},
+  ButtonNote->"http://mathematica.stackexchange.com"]
+}], "Text",
+ Plucks`Private`InitializationGroup -> True],
+
+Cell["\<\
+Write me if you like this. I\[CloseCurlyQuote]m not git-literate.\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Initialization", "Section",
+ CellTags->"Initialization",
+ Plucks`Private`InitializationGroup -> True],
+
+Cell[CellGroupData[{
+
+Cell["Dependencies", "Subsection",
+ CellTags->"Dependencies",
+ Plucks`Private`InitializationGroup -> True],
+
+Cell[TextData[{
+ "Definitions in this section are non-essential for understanding of the main \
+functionality but are essential for it to work properly. They could be placed \
+in a separate package, or a set of packages (and probably should be, unless \
+the users and developers want to avoid lots of interdependent layers in the \
+packages system). They should not be discussed and updated in the user domain \
+of this Pluck. Therefore, they are provided here without examples, and \
+outside of the package context. Hence,",
+ " ",
+ StyleBox["BeginPackage", "Input"],
+ " ",
+ "includes the call to current",
+ " ",
+ StyleBox["Context", "Input"],
+ "."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"iterateOverList", "[", 
+   RowBox[{"f_", ",", " ", 
+    RowBox[{"{", 
+     RowBox[{"relativePredicate_", ",", " ", "absolutePredicate_"}], "}"}], 
+    ",", " ", "list_List"}], "]"}], " ", ":=", "\[IndentingNewLine]", 
+  RowBox[{"Fold", "[", "\[IndentingNewLine]", "  ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"With", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"oldValue", " ", "=", " ", 
+         RowBox[{"#1", "[", 
+          RowBox[{"[", "2", "]"}], "]"}]}], "}"}], ",", "\[IndentingNewLine]",
+        "  ", 
+       RowBox[{"With", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"newValue", " ", "=", " ", 
+           RowBox[{"absolutePredicate", "[", 
+            RowBox[{"oldValue", ",", " ", 
+             RowBox[{"f", "@", "#2"}]}], "]"}]}], "}"}], ",", 
+         "\[IndentingNewLine]", "  ", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"relativePredicate", "[", 
+            RowBox[{"oldValue", ",", " ", "newValue"}], "]"}], ",", " ", 
+           RowBox[{"{", 
+            RowBox[{"#2", ",", " ", "newValue"}], "}"}], ",", " ", "#1"}], 
+          "]"}]}], "]"}]}], "]"}], "&"}], "\n", ",", " ", 
+    RowBox[{"{", 
+     RowBox[{"Null", ",", " ", 
+      RowBox[{"absolutePredicate", "[", "]"}]}], "}"}], "\n", ",", " ", 
+    "list"}], "]"}]}]], "Code"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"maximizeOverListIteratively", "[", 
+   RowBox[{"f_", ",", " ", "list_List"}], "]"}], " ", ":=", 
+  "\[IndentingNewLine]", 
+  RowBox[{"iterateOverList", "[", 
+   RowBox[{"f", ",", " ", 
+    RowBox[{"{", 
+     RowBox[{"Less", ",", " ", "Max"}], "}"}], ",", " ", "list"}], 
+   "]"}]}]], "Code"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"stringOfMaxLength", " ", "=", "\n", 
+   RowBox[{"Composition", "[", "\n", "  ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Part", "[", 
+       RowBox[{"#", ",", " ", "1"}], "]"}], "&"}], "\n", ",", " ", 
+     RowBox[{
+      RowBox[{"maximizeOverListIteratively", "[", 
+       RowBox[{"StringLength", ",", " ", "#"}], "]"}], "&"}]}], "]"}]}], 
+  ";"}]], "Code"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"gatherByInOpeners", "[", 
+   RowBox[{"list_List", ",", " ", "f_", ",", " ", 
+    RowBox[{"sortedListsWrapper_:", "Identity"}]}], "]"}], " ", ":=", "\n", 
+  RowBox[{
+   RowBox[{"SortBy", "[", "\n", "  ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"OpenerView", "@", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"f", "@", 
+           RowBox[{"First", "@", "#"}]}], ",", " ", 
+          RowBox[{"sortedListsWrapper", "@", "#"}]}], "}"}]}], "&"}], " ", "/@",
+       "\n", "  ", 
+      RowBox[{"GatherBy", "[", 
+       RowBox[{"list", ",", " ", "f"}], "]"}]}], "\n", ",", " ", 
+     RowBox[{
+      RowBox[{"#", "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", " ", "1"}], "]"}], "]"}], "&"}]}], "]"}], " ", "//",
+    "\n", "Column"}]}]], "Code"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"someLongReportOpener", "[", 
+   RowBox[{"expr_", ",", " ", 
+    RowBox[{"header", ":", 
+     RowBox[{"_String", ":", "\"\<Report\>\""}]}]}], "]"}], " ", ":=", 
+  "\[IndentingNewLine]", 
+  RowBox[{"OpenerView", " ", "@", "\n", 
+   RowBox[{"{", " ", 
+    RowBox[{
+     RowBox[{"Row", "@", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Spacer", "@", "2"}], ",", " ", 
+        RowBox[{"Text", "@", 
+         RowBox[{"Style", "[", 
+          RowBox[{"header", ",", " ", "Bold", ",", " ", "18"}], "]"}]}]}], 
+       "}"}]}], "\n", ",", " ", "expr"}], " ", "}"}]}]}]], "Code",
+ Plucks`Private`InitializationGroup -> True]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Public Context", "Subsection",
+ Plucks`Private`InitializationGroup -> True],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"BeginPackage", "[", 
+   RowBox[{"\"\<SimpleUnitTesting`\>\"", ",", " ", 
+    RowBox[{"{", 
+     RowBox[{"Context", "[", "]"}], "}"}]}], "]"}], ";"}]], "Code",
+ Deletable->False,
+ CellTags->"BeginPackage",
+ Plucks`Private`InitializationGroup -> True]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Documentation", "Subsection",
+ CellTags->"Documentation",
+ Plucks`Private`InitializationGroup -> True],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Test", "::", "usage"}], " ", "=", " ", 
+   "\"\<Tests container. I am surprised this one was not defined initially.\>\
+\""}], ";"}]], "Code",
+ Plucks`Private`InitializationGroup -> True],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"TestID", "::", "usage"}], " ", "=", " ", 
+   "\"\<TestID container. I am surprised this one was not defined, too. Am I \
+missing something?\>\""}], ";"}]], "Code",
+ Plucks`Private`InitializationGroup -> True],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"$CurrentApp", "::", "usage"}], " ", "=", " ", "\"\<\>\""}], 
+  ";"}]], "Code"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"TestMyApp", "::", "usage"}], " ", "=", " ", 
+   "\"\<TestMyApp[\\\"\!\(\*
+StyleBox[\"file\",
+FontSlant->\"Italic\"]\)\\\"] tests \[OpenCurlyDoubleQuote]\!\(\*
+StyleBox[\"file\",
+FontSlant->\"Italic\"]\).mt\[CloseCurlyDoubleQuote] in Tests subdirectory of \
+$CurrentApp, pretty printing the result.\>\""}], ";"}]], "Code"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"QuickExampleInstall", "::", "usage"}], " ", "=", " ", 
+   "\"\<Installs toy example to run.\>\""}], ";"}]], "Code"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Private Context", "Subsection",
+ Plucks`Private`InitializationGroup -> True],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Begin", "[", "\"\<`Private`\>\"", "]"}], ";"}]], "Code",
+ Plucks`Private`InitializationGroup -> True]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Implementation", "Section",
+ CellTags->"Implementation",
+ Plucks`Private`InitializationGroup -> True],
+
+Cell[CellGroupData[{
+
+Cell["TestCheck, UnitTestOpener", "Subsubsection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"$CurrentApp", " ", "=", " ", "\"\<SimpleUnitTestingTesting\>\""}], 
+  ";"}]], "Code"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SetAttributes", "[", 
+   RowBox[{"Test", ",", " ", "HoldAll"}], "]"}], ";"}]], "Code"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SetAttributes", "[", 
+   RowBox[{"expected", ",", " ", "HoldFirst"}], "]"}], ";"}]], "Code"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"TestCheck", "@", 
+   RowBox[{"Test", "[", 
+    RowBox[{"expr_", ",", " ", "result_", ",", " ", 
+     RowBox[{"TestID", " ", "\[Rule]", " ", "id_"}]}], "]"}]}], ":=", 
+  "\[IndentingNewLine]", 
+  RowBox[{"With", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"exprEvaluated", " ", "=", " ", "expr"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"\"\<Test Result\>\"", "[", 
+     RowBox[{
+      RowBox[{"TestID", "@", "id"}], "\[IndentingNewLine]", ",", " ", 
+      RowBox[{"\"\<Passed\>\"", "@", 
+       RowBox[{"Or", "[", 
+        RowBox[{
+         RowBox[{"exprEvaluated", " ", "===", " ", "result"}], ",", " ", 
+         RowBox[{"False", "@", 
+          RowBox[{"expected", "@", "result"}]}]}], "]"}]}], 
+      "\[IndentingNewLine]", ",", " ", 
+      RowBox[{"Test", "@", "expr"}], "\[IndentingNewLine]", ",", " ", 
+      RowBox[{"\"\<Evaluated Test Expression\>\"", "@", "exprEvaluated"}]}], 
+     "]"}]}], "]"}]}]], "Code"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Options", "@", "UnitTestOpener"}], " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"\"\<Always show originals\>\"", " ", "\[Rule]", " ", "False"}], 
+    "}"}]}], ";"}]], "Code"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"UnitTestOpener", "[", 
+   RowBox[{
+    RowBox[{"tr", ":", 
+     RowBox[{"\"\<Test Result\>\"", "@", "__"}]}], ",", " ", 
+    RowBox[{"longestTestIDInARow_:", "\"\<\>\""}], ",", " ", 
+    RowBox[{"opts", ":", 
+     RowBox[{"OptionsPattern", "[", "]"}]}]}], "]"}], " ", ":=", "\n", 
+  RowBox[{"With", "[", "\n", 
+   RowBox[{
+    RowBox[{"{", " ", 
+     RowBox[{
+      RowBox[{"expected", " ", "=", "\n", "  ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Quiet", " ", "@", "\n", "  ", 
+          RowBox[{"Replace", "[", "\n", "    ", 
+           RowBox[{
+            RowBox[{"Fold", "[", 
+             RowBox[{
+              RowBox[{"Composition", "[", 
+               RowBox[{"First", ",", " ", 
+                RowBox[{
+                 RowBox[{"Cases", "[", 
+                  RowBox[{"#1", ",", " ", "#2", ",", " ", 
+                   RowBox[{"{", "1", "}"}], ",", " ", "1"}], "]"}], "&"}]}], 
+               "]"}], "\n", "    ", ",", " ", "#", ",", " ", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"p", ":", 
+                  RowBox[{"Blank", "@", "\"\<Passed\>\""}]}], " ", 
+                 "\[RuleDelayed]", " ", "p"}], ",", " ", 
+                RowBox[{"f_False", " ", "\[RuleDelayed]", " ", "f"}], ",", 
+                " ", 
+                RowBox[{
+                 RowBox[{"expected", "@", "val_"}], " ", "\[RuleDelayed]", 
+                 " ", 
+                 RowBox[{"HoldForm", "@", "val"}]}]}], "}"}]}], "]"}], "\n", 
+            "  ", ",", " ", 
+            RowBox[{"_First", " ", "\[Rule]", " ", "None"}], ",", " ", 
+            RowBox[{"{", "0", "}"}]}], "]"}]}], "&"}], " ", "@", "\n", "  ", 
+        "tr"}]}], "\n", ",", " ", 
+      RowBox[{"testID", " ", "=", " ", 
+       RowBox[{"First", "@", 
+        RowBox[{"Cases", "[", 
+         RowBox[{"tr", ",", " ", 
+          RowBox[{
+           RowBox[{"TestID", "@", "x_"}], " ", "\[RuleDelayed]", " ", "x"}], 
+          ",", " ", 
+          RowBox[{"{", "1", "}"}], ",", " ", "1"}], "]"}]}]}], "\n", ",", " ", 
+      RowBox[{"evaluatedTestExpression", " ", "=", "\n", "  ", 
+       RowBox[{"First", "@", 
+        RowBox[{"Cases", "[", 
+         RowBox[{"tr", ",", " ", 
+          RowBox[{
+           RowBox[{"\"\<Evaluated Test Expression\>\"", "@", "x_"}], " ", 
+           "\[RuleDelayed]", " ", "x"}], ",", " ", 
+          RowBox[{"{", "1", "}"}], ",", " ", "1"}], "]"}]}]}], "\n", ",", " ", 
+      RowBox[{"passedQ", " ", "=", " ", 
+       RowBox[{"TrueQ", "@", 
+        RowBox[{"First", "@", 
+         RowBox[{"Cases", "[", 
+          RowBox[{"tr", ",", " ", 
+           RowBox[{
+            RowBox[{"\"\<Passed\>\"", "@", "x_"}], " ", "\[RuleDelayed]", " ",
+             "x"}], ",", " ", 
+           RowBox[{"{", "1", "}"}], ",", " ", "1"}], "]"}]}]}]}]}], "}"}], 
+    ",", "\n", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"OpenerView", "[", 
+       RowBox[{"#", ",", " ", 
+        RowBox[{"!", "passedQ"}]}], "]"}], "&"}], " ", "@", "\n", 
+     RowBox[{"{", " ", 
+      RowBox[{
+       RowBox[{"Framed", "[", "\n", "    ", 
+        RowBox[{
+         RowBox[{"Overlay", "[", "\n", "      ", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Style", "[", 
+             RowBox[{"#", ",", " ", "Bold"}], "]"}], "&"}], " ", "/@", "\n", 
+           "      ", 
+           RowBox[{"{", " ", 
+            RowBox[{"testID", "\n", "      ", ",", " ", 
+             RowBox[{"Invisible", "@", "longestTestIDInARow"}]}], " ", 
+            "}"}]}], "]"}], "\n", "  ", ",", " ", 
+         RowBox[{"Background", " ", "\[Rule]", " ", 
+          RowBox[{"If", "[", 
+           RowBox[{"passedQ", ",", " ", 
+            RowBox[{"Darker", "@", "Green"}], ",", " ", 
+            RowBox[{"Lighter", "@", "Red"}]}], "]"}]}], "\n", "  ", ",", " ", 
+         RowBox[{"FrameStyle", " ", "\[Rule]", " ", "None"}]}], "]"}], "\n", 
+       ",", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"{", " ", 
+          RowBox[{
+           RowBox[{"{", "   ", 
+            RowBox[{"\"\<Tested:\>\"", " ", ",", " ", 
+             RowBox[{"First", "@", 
+              RowBox[{"Cases", "[", 
+               RowBox[{"tr", ",", " ", 
+                RowBox[{
+                 RowBox[{"Test", "@", "x_"}], " ", "\[RuleDelayed]", " ", 
+                 RowBox[{"HoldForm", "@", "x"}]}], ",", " ", 
+                RowBox[{"{", "1", "}"}], ",", " ", "1"}], "]"}]}]}], " ", 
+            "}"}], "\n", "  ", ",", " ", 
+           RowBox[{"{", " ", 
+            RowBox[{"\"\<Expected:\>\"", " ", ",", " ", 
+             RowBox[{"If", "[", 
+              RowBox[{
+              "passedQ", "\n", "                    ", ",", "  ", 
+               "evaluatedTestExpression", "\n", "                    ", ",", 
+               "  ", 
+               RowBox[{"ReleaseHold", "@", "expected"}]}], "]"}]}], " ", 
+            "}"}], "\n", "  ", ",", " ", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"!", "passedQ"}], " ", "&&", " ", 
+                RowBox[{
+                 RowBox[{"HoldForm", "@", 
+                  RowBox[{"Evaluate", "@", 
+                   RowBox[{"ReleaseHold", "@", "expected"}]}]}], " ", "=!=", 
+                 " ", "expected"}]}], ")"}], "||", " ", 
+              RowBox[{"OptionValue", "@", "\"\<Always show originals\>\""}]}],
+              "\n", "    ", ",", "  ", 
+             RowBox[{"{", " ", 
+              RowBox[{"\"\<Written:\>\"", " ", ",", " ", "expected"}], " ", 
+              "}"}], "\n", "    ", ",", "  ", 
+             RowBox[{
+              RowBox[{"##", "&"}], "[", "]"}]}], "]"}]}], " ", "}"}], "\n", 
+         "  ", "~", "Join", "~", "\n", "  ", 
+         RowBox[{"If", "[", 
+          RowBox[{"passedQ", "\n", "  ", ",", "  ", 
+           RowBox[{"{", "}"}], "\n", "  ", ",", "  ", 
+           RowBox[{"{", 
+            RowBox[{"{", 
+             RowBox[{
+             "\"\<Evaluated:\>\"", ",", " ", "evaluatedTestExpression"}], 
+             "}"}], "}"}]}], "]"}]}], " ", "//", "\n", "  ", 
+        RowBox[{
+         RowBox[{"Grid", "[", 
+          RowBox[{"#", ",", " ", 
+           RowBox[{"Alignment", " ", "\[Rule]", " ", 
+            RowBox[{"{", 
+             RowBox[{"{", 
+              RowBox[{"Right", ",", " ", "Left"}], "}"}], "}"}]}]}], "]"}], 
+         "&"}]}]}], " ", "}"}]}]}], "]"}]}]], "Code"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"TestCheck", "[", 
+   RowBox[{"tl", ":", 
+    RowBox[{"{", "__Test", "}"}]}], "]"}], " ", ":=", "\n", 
+  RowBox[{"gatherByInOpeners", "[", "\[IndentingNewLine]", "  ", 
+   RowBox[{
+    RowBox[{"TestCheck", " ", "/@", " ", "tl"}], "\n", ",", " ", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"MemberQ", "[", 
+        RowBox[{"#", ",", " ", 
+         RowBox[{"\"\<Passed\>\"", "@", 
+          RowBox[{"False", "@", "_"}]}]}], "]"}], "\n", "  ", ",", "  ", 
+       "\"\<Failed Tests\>\"", "\n", "  ", ",", "  ", 
+       "\"\<Passed Tests\>\""}], "]"}], "&"}], "\n", ",", " ", 
+    RowBox[{
+     RowBox[{"With", "[", "\n", "  ", 
+      RowBox[{
+       RowBox[{"{", " ", 
+        RowBox[{"longestTestID", " ", "=", "\[IndentingNewLine]", "    ", 
+         RowBox[{"stringOfMaxLength", " ", "@", "\n", "      ", 
+          RowBox[{"Flatten", "[", "\n", "        ", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"StringSplit", "[", 
+              RowBox[{"#", ",", " ", "\"\<\\n\>\""}], "]"}], "&"}], " ", "/@",
+             "\n", "        ", 
+            RowBox[{"Identity", " ", "@@@", " ", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"First", "@", 
+                 RowBox[{"Cases", "[", 
+                  RowBox[{"#", ",", " ", 
+                   RowBox[{"t_TestID", " ", "\[RuleDelayed]", " ", "t"}], ",",
+                    " ", 
+                   RowBox[{"{", "1", "}"}], ",", " ", "1"}], "]"}]}], "&"}], 
+               " ", "/@", " ", "#"}], ")"}]}]}], "]"}]}]}], "}"}], 
+       "\[IndentingNewLine]", ",", " ", 
+       RowBox[{"Column", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"UnitTestOpener", "[", 
+           RowBox[{"#", ",", " ", "longestTestID"}], "]"}], "&"}], " ", "/@", 
+         " ", "#"}], "]"}]}], "]"}], "&"}]}], "]"}]}]], "Code"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["UnitTestReport", "Subsubsection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"UnitTestReport", "[", 
+   RowBox[{"tl", ":", 
+    RowBox[{"{", "__Test", "}"}]}], "]"}], " ", ":=", "\[IndentingNewLine]", 
+  RowBox[{"Deploy", "@", 
+   RowBox[{"someLongReportOpener", "[", 
+    RowBox[{
+     RowBox[{"TestCheck", "@", "tl"}], ",", " ", "\"\<Unit Test Report\>\""}],
+     "]"}]}]}]], "Code"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"UnitTestReport", "@", "_"}], " ", ":=", " ", 
+  "\"\<Not a List of Test's.\>\""}]], "Code"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["RunUnitTest", "Subsubsection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"RunUnitTest", "@", "file_String"}], " ", ":=", "\n", 
+  RowBox[{"If", "[", 
+   RowBox[{
+    RowBox[{"FileExistsQ", "@", "file"}], "\n", ",", "  ", 
+    RowBox[{"UnitTestReport", "@", 
+     RowBox[{"Import", "[", 
+      RowBox[{"file", ",", " ", "\"\<Package\>\""}], "]"}]}], "\n", ",", "  ", 
+    RowBox[{"OpenerView", " ", "@", "\n", "   ", 
+     RowBox[{"{", " ", 
+      RowBox[{"\"\<No test file.\>\"", "\n", "   ", ",", " ", 
+       RowBox[{"StringJoin", "[", 
+        RowBox[{
+        "\"\<This is RunUnitTest. I could not perform the test because I \
+could not find the following test file: \>\"", "\n", "     ", ",", " ", 
+         "file", "\n", "     ", ",", " ", 
+         "\"\<\\nCould be a human mistake, but, more probably, the file name \
+was provided by some other expression, and I'm still a bit dumb and can't \
+tell you what was the expression, exactly.\>\""}], "]"}]}], "}"}]}]}], 
+   "]"}]}]], "Code"],
+
+Cell[BoxData[
+ RowBox[{"appDir", " ", ":=", "\n", 
+  RowBox[{"FileNameJoin", " ", "@", "\n", 
+   RowBox[{"{", " ", 
+    RowBox[{
+    "$UserBaseDirectory", ",", " ", "\"\<Applications\>\"", ",", " ", 
+     "$CurrentApp"}], " ", "}"}]}]}]], "Code"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"TestMyApp", "@", "testName_String"}], " ", ":=", "\n", 
+  RowBox[{"With", "[", 
+   RowBox[{
+    RowBox[{"{", " ", 
+     RowBox[{"testFileName", " ", "=", "\n", "       ", 
+      RowBox[{"FileNameJoin", " ", "@", "\n", "       ", 
+       RowBox[{"{", " ", 
+        RowBox[{
+        "appDir", ",", " ", "\"\<Tests\>\"", "\n", "       ", ",", " ", 
+         RowBox[{"testName", " ", "<>", " ", "\"\<.mt\>\""}]}], "}"}]}]}], 
+     "}"}], "\n", ",", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"FileExistsQ", "@", "#"}], "\n", "  ", ",", "  ", 
+        RowBox[{"RunUnitTest", "@", "#"}], "\n", "  ", ",", "  ", 
+        RowBox[{"\"\<Error\>\"", "@", 
+         RowBox[{"Row", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"\"\<No test file:\>\"", ",", " ", "#"}], "}"}], ",", 
+           " ", "\"\<  \>\""}], "]"}]}]}], "]"}], "&"}], "@", 
+     "testFileName"}]}], "]"}]}]], "Code"],
+
+Cell[BoxData[
+ RowBox[{"QuickExampleInstall", " ", ":=", " ", 
+  RowBox[{
+   RowBox[{"{", "\n", 
+    RowBox[{
+     RowBox[{"Quiet", "@", 
+      RowBox[{"DeleteDirectory", "[", 
+       RowBox[{"appDir", ",", " ", 
+        RowBox[{"DeleteContents", " ", "\[Rule]", " ", "True"}]}], "]"}]}], 
+     ",", "\n", 
+     RowBox[{"Quiet", "@", 
+      RowBox[{"CreateDirectory", "@", "appDir"}]}], ",", "\n", 
+     RowBox[{"Quiet", "@", 
+      RowBox[{"CreateDirectory", "@", 
+       RowBox[{"FileNameJoin", "@", 
+        RowBox[{"{", 
+         RowBox[{"appDir", ",", " ", "\"\<Tests\>\""}], "}"}]}]}]}], ",", 
+     "\n", 
+     RowBox[{"Export", "[", "\n", "  ", 
+      RowBox[{
+       RowBox[{"FileNameJoin", " ", "@", "\n", "  ", 
+        RowBox[{"{", " ", 
+         RowBox[{"appDir", ",", " ", "\"\<Tests\>\"", "\n", "  ", ",", " ", 
+          RowBox[{
+          "\"\<SuperCalculations\>\"", " ", "<>", " ", "\"\<.mt\>\""}]}], 
+         "}"}]}], ",", "\n", 
+       RowBox[{"With", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"var", " ", "=", " ", 
+           RowBox[{"ToExpression", "@", "\"\<x\>\""}]}], "}"}], ",", "\n", 
+         RowBox[{"Unevaluated", " ", "@", "\n", 
+          RowBox[{"{", "\n", "\n", 
+           RowBox[{
+            RowBox[{"Test", "[", 
+             RowBox[{
+              RowBox[{"Plus", " ", "@@", " ", 
+               RowBox[{"Prime", " ", "/@", " ", 
+                RowBox[{"Range", "@", "2"}]}]}], "\n", ",", " ", 
+              RowBox[{"2", "+", "3"}], "\n", ",", " ", 
+              RowBox[{
+              "TestID", " ", "->", " ", 
+               "\"\<Sum of the first two primes\>\""}]}], "]"}], ",", "\n", 
+            "\n", 
+            RowBox[{"Test", "[", 
+             RowBox[{
+              RowBox[{"Plus", " ", "@@", " ", 
+               RowBox[{"Prime", " ", "/@", " ", 
+                RowBox[{"Range", "@", "3"}]}]}], "\n", ",", " ", 
+              RowBox[{"2", "+", "35"}], "\n", ",", " ", 
+              RowBox[{
+              "TestID", " ", "->", " ", 
+               "\"\<Sum of the first three primes\>\""}]}], "]"}], ",", "\n", 
+            "\n", 
+            RowBox[{"Test", "[", 
+             RowBox[{
+              RowBox[{"Sqrt", "[", 
+               RowBox[{"var", "^", "2"}], "]"}], "\n", ",", " ", 
+              RowBox[{"PlusMinus", "@", "var"}], "\n", ",", " ", 
+              RowBox[{
+              "TestID", " ", "->", " ", 
+               "\"\<Some serious square root\>\""}]}], "]"}]}], "\n", "\n", 
+           "}"}]}]}], "]"}], ",", " ", "\"\<Package\>\""}], "]"}], ",", "\n", 
+     "\"\<\>\"", ",", "\n", 
+     "\"\<No error checking implemented here (yet?). Hopefully, all went \
+fine.\>\""}], "}"}], " ", "//", " ", "Column"}]}]], "Code"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Examples", "Section",
+ CellTags->"Examples",
+ Plucks`Private`InitializationGroup -> True],
+
+Cell[BoxData[
+ RowBox[{"<<", "SimpleUnitTesting`"}]], "Input"],
+
+Cell[BoxData["QuickExampleInstall"], "Input"],
+
+Cell[BoxData[
+ RowBox[{"TestMyApp", "@", "\"\<SuperCalculations\>\""}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"TestMyApp", "@", "\"\<Oops\>\""}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Bugs", "Section",
+ CellTags->"Bugs",
+ Plucks`Private`InitializationGroup -> True],
+
+Cell["No bugs submitted yet.", "Text",
+ Plucks`Private`InitializationGroup -> True]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Tasks (= Problems (= Exercises))", "Section",
+ CellTags->"TasksProblemsExercises",
+ Plucks`Private`InitializationGroup -> True],
+
+Cell["\<\
+It seems to be a good idea to order tasks in such a way that the most \
+difficult and conceptual problems would appear later, much the way it\
+\[CloseCurlyQuote]s done in textbooks.\
+\>", "Text",
+ Plucks`Private`InitializationGroup -> True],
+
+Cell[CellGroupData[{
+
+Cell["Messages", "Subsection",
+ Plucks`Private`InitializationGroup -> True],
+
+Cell["Add Message for $CurrentApp.", "Text",
+ Plucks`Private`InitializationGroup -> True]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Modularity", "Subsection",
+ Plucks`Private`InitializationGroup -> True],
+
+Cell["\<\
+Maybe I should just move all the stuff in global context inside?\
+\>", "Text",
+ Plucks`Private`InitializationGroup -> True]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Data structures", "Subsection",
+ Plucks`Private`InitializationGroup -> True],
+
+Cell["\<\
+Data structures may look weird. For now I prefer utilizing the most basic \
+Mathematica constructs for data.\
+\>", "Text",
+ Plucks`Private`InitializationGroup -> True]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Improvement", "Subsection",
+ Plucks`Private`InitializationGroup -> True],
+
+Cell["\<\
+It probably should be far more easy to switch values of $CurrentApp\
+\>", "Text",
+ Plucks`Private`InitializationGroup -> True],
+
+Cell["\<\
+Numbers of totally Failed and Passed tests (in the head of Report, too)\
+\>", "Text"],
+
+Cell["\<\
+I open Failed tests openers by default, it's from the old days when I wasn't \
+gathering them. Probably should be an option.\
+\>", "Text"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Notes", "Section",
+ CellTags->"Notes",
+ Plucks`Private`InitializationGroup -> True],
+
+Cell["No notes yet.", "Text",
+ Plucks`Private`InitializationGroup -> True]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Finalization", "Section",
+ CellTags->"Finalization",
+ Plucks`Private`InitializationGroup -> True],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"End", "[", "]"}], ";"}], " ", 
+  RowBox[{"(*", " ", "`Private`", " ", "*)"}]}]], "Code",
+ Plucks`Private`InitializationGroup -> True],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"EndPackage", "[", "]"}], ";"}], " ", 
+  RowBox[{"(*", " ", "SimpleUnitTesting``", " ", "*)"}]}]], "Code",
+ Deletable->False,
+ CellTags->"EndPackage",
+ Plucks`Private`InitializationGroup -> True]
+}, Closed]],
+
+Cell["User Domain", "Subtitle",
+ CellTags->"UserDomain",
+ Plucks`Private`InitializationGroup -> False]
+}, Open  ]]
+},
+InitializationCellEvaluation->True,
+WindowSize->{712, 575},
+WindowMargins->{{232, Automatic}, {Automatic, 44}},
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+ShowSelection->True,
+FrontEndVersion->"8.0 for Microsoft Windows (64-bit) (February 23, 2011)",
+StyleDefinitions->"Default.nb",
+Plucks`Private`TrackCellChangeTimes -> False
+]
+
