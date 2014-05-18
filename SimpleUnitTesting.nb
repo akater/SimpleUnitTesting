@@ -8,7 +8,7 @@ Cell["Simple Unit Testing", "Title",
  CellTags->"PluckTitle",
  Plucks`Private`InitializationGroup -> True],
 
-Cell["v14.05.17 (latest review by maintainer)", "Subsubtitle",
+Cell["v14.05.18 (latest review by maintainer)", "Subsubtitle",
  ShowCellBracket->False,
  CellTags->"MaintainerReviewDate"],
 
@@ -438,55 +438,54 @@ Cell[BoxData[
          RowBox[{"FrameStyle", " ", "\[Rule]", " ", "None"}]}], "]"}], "\n", 
        ",", " ", 
        RowBox[{
-        RowBox[{
-         RowBox[{"{", " ", 
-          RowBox[{
-           RowBox[{"{", "   ", 
-            RowBox[{"\"\<Tested:\>\"", " ", ",", " ", 
-             RowBox[{"First", "@", 
-              RowBox[{"Cases", "[", 
-               RowBox[{"tr", ",", " ", 
-                RowBox[{
-                 RowBox[{"Test", "@", "x_"}], " ", "\[RuleDelayed]", " ", 
-                 RowBox[{"HoldForm", "@", "x"}]}], ",", " ", 
-                RowBox[{"{", "1", "}"}], ",", " ", "1"}], "]"}]}]}], " ", 
-            "}"}], "\n", "  ", ",", " ", 
-           RowBox[{"{", " ", 
-            RowBox[{"\"\<Expected:\>\"", " ", ",", " ", 
-             RowBox[{"If", "[", 
-              RowBox[{
-              "passedQ", "\n", "                    ", ",", "  ", 
-               "evaluatedTestExpression", "\n", "                    ", ",", 
-               "  ", 
-               RowBox[{"ReleaseHold", "@", "expected"}]}], "]"}]}], " ", 
-            "}"}], "\n", "  ", ",", " ", 
-           RowBox[{"If", "[", 
-            RowBox[{
-             RowBox[{
-              RowBox[{"(", 
+        RowBox[{"{", " ", 
+         RowBox[{
+          RowBox[{"{", "   ", 
+           RowBox[{"\"\<Tested:\>\"", " ", ",", " ", 
+            RowBox[{"First", "@", 
+             RowBox[{"Cases", "[", 
+              RowBox[{"tr", ",", " ", 
                RowBox[{
-                RowBox[{"!", "passedQ"}], " ", "&&", " ", 
-                RowBox[{
-                 RowBox[{"HoldForm", "@", 
-                  RowBox[{"Evaluate", "@", 
-                   RowBox[{"ReleaseHold", "@", "expected"}]}]}], " ", "=!=", 
-                 " ", "expected"}]}], ")"}], "||", " ", 
-              RowBox[{"OptionValue", "@", "\"\<Always show originals\>\""}]}],
-              "\n", "    ", ",", "  ", 
-             RowBox[{"{", " ", 
-              RowBox[{"\"\<Written:\>\"", " ", ",", " ", "expected"}], " ", 
-              "}"}], "\n", "    ", ",", "  ", 
-             RowBox[{
-              RowBox[{"##", "&"}], "[", "]"}]}], "]"}]}], " ", "}"}], "\n", 
-         "  ", "~", "Join", "~", "\n", "  ", 
-         RowBox[{"If", "[", 
-          RowBox[{"passedQ", "\n", "  ", ",", "  ", 
-           RowBox[{"{", "}"}], "\n", "  ", ",", "  ", 
-           RowBox[{"{", 
+                RowBox[{"Test", "@", "x_"}], " ", "\[RuleDelayed]", " ", 
+                RowBox[{"HoldForm", "@", "x"}]}], ",", " ", 
+               RowBox[{"{", "1", "}"}], ",", " ", "1"}], "]"}]}]}], " ", 
+           "}"}], "\n", "  ", ",", " ", 
+          RowBox[{"If", "[", 
+           RowBox[{"passedQ", "\n", "    ", ",", "  ", 
+            RowBox[{
+             RowBox[{"##", "&"}], "[", "]"}], "\n", "    ", ",", "  ", 
             RowBox[{"{", 
              RowBox[{
              "\"\<Evaluated:\>\"", ",", " ", "evaluatedTestExpression"}], 
-             "}"}], "}"}]}], "]"}]}], " ", "//", "\n", "  ", 
+             "}"}]}], "]"}], "\n", "  ", ",", " ", 
+          RowBox[{"{", " ", 
+           RowBox[{"\"\<Expected:\>\"", " ", ",", " ", 
+            RowBox[{"If", "[", 
+             RowBox[{
+             "passedQ", "\n", "                    ", ",", "  ", 
+              "evaluatedTestExpression", "\n", "                    ", ",", 
+              "  ", 
+              RowBox[{"ReleaseHold", "@", "expected"}]}], "]"}]}], " ", "}"}],
+           "\n", "  ", ",", " ", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"!", "passedQ"}], " ", "&&", " ", 
+               RowBox[{
+                RowBox[{"HoldForm", "@", 
+                 RowBox[{"Evaluate", "@", 
+                  RowBox[{"ReleaseHold", "@", "expected"}]}]}], " ", "=!=", 
+                " ", "expected"}]}], ")"}], "||", " ", 
+             RowBox[{"OptionValue", "@", "\"\<Always show originals\>\""}]}], 
+            "\n", "    ", ",", "  ", 
+            RowBox[{"{", " ", 
+             RowBox[{"\"\<Written:\>\"", " ", ",", " ", "expected"}], " ", 
+             "}"}], "\n", "    ", ",", "  ", 
+            RowBox[{
+             RowBox[{"##", "&"}], "[", "]"}]}], "]"}]}], " ", "}"}], " ", "//",
+         "\n", "  ", 
         RowBox[{
          RowBox[{"Grid", "[", 
           RowBox[{"#", ",", " ", 
@@ -705,13 +704,706 @@ Cell["Examples", "Section",
 Cell[BoxData[
  RowBox[{"<<", "SimpleUnitTesting`"}]], "Input"],
 
-Cell[BoxData["QuickExampleInstall"], "Input"],
+Cell[BoxData[
+ RowBox[{"QuickExampleInstall", ";"}]], "Input"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"TestMyApp", "@", "\"\<SuperCalculations\>\""}]], "Input"],
 
 Cell[BoxData[
- RowBox[{"TestMyApp", "@", "\"\<Oops\>\""}]], "Input"]
+ TagBox[
+  TagBox[
+   DynamicModuleBox[{Typeset`var$$ = True}, 
+    InterpretationBox[
+     StyleBox[
+      PaneSelectorBox[{False->GridBox[{
+         {
+          OpenerBox[Dynamic[Typeset`var$$],
+           Appearance->Automatic,
+           AutoAction->False,
+           ContinuousAction->False,
+           Enabled->Automatic], 
+          TemplateBox[{InterpretationBox[
+             StyleBox[
+              
+              GraphicsBox[{}, BaselinePosition -> Baseline, 
+               ImageSize -> {2, 0}], CacheGraphics -> False], 
+             Spacer[2]],InterpretationBox[
+             Cell[
+              BoxData[
+               StyleBox[
+               "\"Unit Test Report\"", StripOnInput -> False, FontSize -> 18, 
+                FontWeight -> Bold]], "Text", "TR"], 
+             Text[
+              Style["Unit Test Report", Bold, 18]]]},
+           "Row",
+           DisplayFunction->(RowBox[{#, "\[InvisibleSpace]", #2}]& ),
+           InterpretationFunction->(RowBox[{"Row", "[", 
+              RowBox[{"{", 
+                RowBox[{#, ",", #2}], "}"}], "]"}]& )]}
+        },
+        AutoDelete->False,
+        BaselinePosition->{1, 1},
+        GridBoxAlignment->{"Columns" -> {{Left}}},
+        GridBoxBackground->{"Columns" -> {{Automatic}}},
+        GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+        GridBoxSpacings->{"Columns" -> {{0.2}}, "Rows" -> {{0.5}}}], True->
+       GridBox[{
+         {
+          OpenerBox[Dynamic[Typeset`var$$],
+           Appearance->Automatic,
+           AutoAction->False,
+           ContinuousAction->False,
+           Enabled->Automatic], 
+          TemplateBox[{InterpretationBox[
+             StyleBox[
+              
+              GraphicsBox[{}, BaselinePosition -> Baseline, 
+               ImageSize -> {2, 0}], CacheGraphics -> False], 
+             Spacer[2]],InterpretationBox[
+             Cell[
+              BoxData[
+               StyleBox[
+               "\"Unit Test Report\"", StripOnInput -> False, FontSize -> 18, 
+                FontWeight -> Bold]], "Text", "TR"], 
+             Text[
+              Style["Unit Test Report", Bold, 18]]]},
+           "Row",
+           DisplayFunction->(RowBox[{#, "\[InvisibleSpace]", #2}]& ),
+           InterpretationFunction->(RowBox[{"Row", "[", 
+              RowBox[{"{", 
+                RowBox[{#, ",", #2}], "}"}], "]"}]& )]},
+         {"", 
+          PaneBox[
+           TagBox[GridBox[{
+              {
+               TagBox[
+                DynamicModuleBox[{Typeset`var$$ = True}, 
+                 InterpretationBox[
+                  StyleBox[
+                   PaneSelectorBox[{False->GridBox[{
+                    {
+                    OpenerBox[Dynamic[Typeset`var$$],
+                    Appearance->Automatic,
+                    AutoAction->False,
+                    ContinuousAction->False,
+                    Enabled->Automatic], "\<\"Failed Tests\"\>"}
+                    },
+                    AutoDelete->False,
+                    BaselinePosition->{1, 1},
+                    GridBoxAlignment->{"Columns" -> {{Left}}},
+                    GridBoxBackground->{"Columns" -> {{Automatic}}},
+                    
+                    GridBoxItemSize->{
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+                    
+                    GridBoxSpacings->{
+                    "Columns" -> {{0.2}}, "Rows" -> {{0.5}}}], True->GridBox[{
+                    {
+                    OpenerBox[Dynamic[Typeset`var$$],
+                    Appearance->Automatic,
+                    AutoAction->False,
+                    ContinuousAction->False,
+                    Enabled->Automatic], "\<\"Failed Tests\"\>"},
+                    {"", 
+                    PaneBox[
+                    TagBox[GridBox[{
+                    {
+                    TagBox[
+                    DynamicModuleBox[{Typeset`var$$ = True}, 
+                    InterpretationBox[
+                    StyleBox[
+                    PaneSelectorBox[{False->GridBox[{
+                    {
+                    OpenerBox[Dynamic[Typeset`var$$],
+                    Appearance->Automatic,
+                    AutoAction->False,
+                    ContinuousAction->False,
+                    Enabled->Automatic], 
+                    FrameBox[
+                    OverlayBox[{
+                    StyleBox["\<\"Sum of the first three primes\"\>",
+                    StripOnInput->False,
+                    FontWeight->Bold], 
+                    StyleBox[
+                    StyleBox["\<\"Sum of the first three primes\"\>",
+                    StripOnInput->False,
+                    ShowContents->False],
+                    StripOnInput->False,
+                    FontWeight->Bold]}],
+                    Background->RGBColor[1, 
+                    Rational[1, 3], 
+                    Rational[1, 3]],
+                    FrameStyle->None,
+                    StripOnInput->False]}
+                    },
+                    AutoDelete->False,
+                    BaselinePosition->{1, 1},
+                    GridBoxAlignment->{"Columns" -> {{Left}}},
+                    GridBoxBackground->{"Columns" -> {{Automatic}}},
+                    
+                    GridBoxItemSize->{
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+                    
+                    GridBoxSpacings->{
+                    "Columns" -> {{0.2}}, "Rows" -> {{0.5}}}], True->GridBox[{
+                    {
+                    OpenerBox[Dynamic[Typeset`var$$],
+                    Appearance->Automatic,
+                    AutoAction->False,
+                    ContinuousAction->False,
+                    Enabled->Automatic], 
+                    FrameBox[
+                    OverlayBox[{
+                    StyleBox["\<\"Sum of the first three primes\"\>",
+                    StripOnInput->False,
+                    FontWeight->Bold], 
+                    StyleBox[
+                    StyleBox["\<\"Sum of the first three primes\"\>",
+                    StripOnInput->False,
+                    ShowContents->False],
+                    StripOnInput->False,
+                    FontWeight->Bold]}],
+                    Background->RGBColor[1, 
+                    Rational[1, 3], 
+                    Rational[1, 3]],
+                    FrameStyle->None,
+                    StripOnInput->False]},
+                    {"", 
+                    PaneBox[
+                    TagBox[GridBox[{
+                    {"\<\"Tested:\"\>", 
+                    TagBox[
+                    RowBox[{"Plus", "@@", 
+                    RowBox[{"Prime", "/@", 
+                    RowBox[{"Range", "[", "3", "]"}]}]}],
+                    HoldForm]},
+                    {
+                    RowBox[{"{", 
+                    RowBox[{"\<\"Evaluated:\"\>", ",", "10"}], "}"}], ""},
+                    {"\<\"Expected:\"\>", "37"},
+                    {"\<\"Written:\"\>", 
+                    TagBox[
+                    RowBox[{"2", "+", "35"}],
+                    HoldForm]}
+                    },
+                    AutoDelete->False,
+                    GridBoxAlignment->{"Columns" -> {Right, Left}},
+                    
+                    GridBoxItemSize->{"Columns" -> {{Automatic}}, 
+                    "Rows" -> {{Automatic}}}],
+                    "Grid"],
+                    ImageMargins->0]}
+                    },
+                    AutoDelete->False,
+                    BaselinePosition->{1, 1},
+                    GridBoxAlignment->{"Columns" -> {{Left}}},
+                    GridBoxBackground->{"Columns" -> {{Automatic}}},
+                    
+                    GridBoxItemSize->{
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+                    
+                    GridBoxSpacings->{
+                    "Columns" -> {{0.2}}, "Rows" -> {{0.5}}}]}, Dynamic[
+                    Typeset`var$$],
+                    Alignment->Automatic,
+                    BaselinePosition->Baseline,
+                    DefaultBaseStyle->"OpenerView",
+                    ImageMargins->0,
+                    ImageSize->Automatic],
+                    Deployed->False,
+                    StripOnInput->False],
+                    OpenerView[{
+                    Framed[
+                    Overlay[{
+                    Style["Sum of the first three primes", Bold], 
+                    Style[
+                    Invisible["Sum of the first three primes"], Bold]}], 
+                    Background -> RGBColor[1, 
+                    Rational[1, 3], 
+                    Rational[1, 3]], FrameStyle -> None], 
+                    Grid[{{"Tested:", 
+                    HoldForm[
+                    Apply[Plus, 
+                    Map[Prime, 
+                    Range[3]]]]}, {{"Evaluated:", 10}}, {"Expected:", 37}, {
+                    "Written:", 
+                    HoldForm[2 + 35]}}, Alignment -> {{Right, Left}}]}, True]],
+                    DynamicModuleValues:>{}],
+                    Setting[#, {0}]& ]},
+                    {
+                    TagBox[
+                    DynamicModuleBox[{Typeset`var$$ = True}, 
+                    InterpretationBox[
+                    StyleBox[
+                    PaneSelectorBox[{False->GridBox[{
+                    {
+                    OpenerBox[Dynamic[Typeset`var$$],
+                    Appearance->Automatic,
+                    AutoAction->False,
+                    ContinuousAction->False,
+                    Enabled->Automatic], 
+                    FrameBox[
+                    OverlayBox[{
+                    StyleBox["\<\"Some serious square root\"\>",
+                    StripOnInput->False,
+                    FontWeight->Bold], 
+                    StyleBox[
+                    StyleBox["\<\"Sum of the first three primes\"\>",
+                    StripOnInput->False,
+                    ShowContents->False],
+                    StripOnInput->False,
+                    FontWeight->Bold]}],
+                    Background->RGBColor[1, 
+                    Rational[1, 3], 
+                    Rational[1, 3]],
+                    FrameStyle->None,
+                    StripOnInput->False]}
+                    },
+                    AutoDelete->False,
+                    BaselinePosition->{1, 1},
+                    GridBoxAlignment->{"Columns" -> {{Left}}},
+                    GridBoxBackground->{"Columns" -> {{Automatic}}},
+                    
+                    GridBoxItemSize->{
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+                    
+                    GridBoxSpacings->{
+                    "Columns" -> {{0.2}}, "Rows" -> {{0.5}}}], True->GridBox[{
+                    {
+                    OpenerBox[Dynamic[Typeset`var$$],
+                    Appearance->Automatic,
+                    AutoAction->False,
+                    ContinuousAction->False,
+                    Enabled->Automatic], 
+                    FrameBox[
+                    OverlayBox[{
+                    StyleBox["\<\"Some serious square root\"\>",
+                    StripOnInput->False,
+                    FontWeight->Bold], 
+                    StyleBox[
+                    StyleBox["\<\"Sum of the first three primes\"\>",
+                    StripOnInput->False,
+                    ShowContents->False],
+                    StripOnInput->False,
+                    FontWeight->Bold]}],
+                    Background->RGBColor[1, 
+                    Rational[1, 3], 
+                    Rational[1, 3]],
+                    FrameStyle->None,
+                    StripOnInput->False]},
+                    {"", 
+                    PaneBox[
+                    TagBox[GridBox[{
+                    {"\<\"Tested:\"\>", 
+                    TagBox[
+                    SqrtBox[
+                    SuperscriptBox["x", "2"]],
+                    HoldForm]},
+                    {
+                    RowBox[{"{", 
+                    RowBox[{"\<\"Evaluated:\"\>", ",", 
+                    SqrtBox[
+                    SuperscriptBox["x", "2"]]}], "}"}], ""},
+                    {"\<\"Expected:\"\>", 
+                    RowBox[{"\[PlusMinus]", "x"}]}
+                    },
+                    AutoDelete->False,
+                    GridBoxAlignment->{"Columns" -> {Right, Left}},
+                    
+                    GridBoxItemSize->{"Columns" -> {{Automatic}}, 
+                    "Rows" -> {{Automatic}}}],
+                    "Grid"],
+                    ImageMargins->0]}
+                    },
+                    AutoDelete->False,
+                    BaselinePosition->{1, 1},
+                    GridBoxAlignment->{"Columns" -> {{Left}}},
+                    GridBoxBackground->{"Columns" -> {{Automatic}}},
+                    
+                    GridBoxItemSize->{
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+                    
+                    GridBoxSpacings->{
+                    "Columns" -> {{0.2}}, "Rows" -> {{0.5}}}]}, Dynamic[
+                    Typeset`var$$],
+                    Alignment->Automatic,
+                    BaselinePosition->Baseline,
+                    DefaultBaseStyle->"OpenerView",
+                    ImageMargins->0,
+                    ImageSize->Automatic],
+                    Deployed->False,
+                    StripOnInput->False],
+                    OpenerView[{
+                    Framed[
+                    Overlay[{
+                    Style["Some serious square root", Bold], 
+                    Style[
+                    Invisible["Sum of the first three primes"], Bold]}], 
+                    Background -> RGBColor[1, 
+                    Rational[1, 3], 
+                    Rational[1, 3]], FrameStyle -> None], 
+                    Grid[{{"Tested:", 
+                    HoldForm[
+                    Sqrt[$CellContext`x^2]]}, {{
+                    "Evaluated:", ($CellContext`x^2)^Rational[1, 2]}}, {
+                    "Expected:", 
+                    PlusMinus[$CellContext`x]}}, 
+                    Alignment -> {{Right, Left}}]}, True]],
+                    DynamicModuleValues:>{}],
+                    Setting[#, {0}]& ]}
+                    },
+                    GridBoxAlignment->{"Columns" -> {{Left}}},
+                    
+                    GridBoxItemSize->{
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+                    "Column"],
+                    ImageMargins->0]}
+                    },
+                    AutoDelete->False,
+                    BaselinePosition->{1, 1},
+                    GridBoxAlignment->{"Columns" -> {{Left}}},
+                    GridBoxBackground->{"Columns" -> {{Automatic}}},
+                    
+                    GridBoxItemSize->{
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+                    
+                    GridBoxSpacings->{
+                    "Columns" -> {{0.2}}, "Rows" -> {{0.5}}}]}, Dynamic[
+                    Typeset`var$$],
+                    Alignment->Automatic,
+                    BaselinePosition->Baseline,
+                    DefaultBaseStyle->"OpenerView",
+                    ImageMargins->0,
+                    ImageSize->Automatic],
+                   Deployed->False,
+                   StripOnInput->False],
+                  OpenerView[{"Failed Tests", 
+                    Column[{
+                    OpenerView[{
+                    Framed[
+                    Overlay[{
+                    Style["Sum of the first three primes", Bold], 
+                    Style[
+                    Invisible["Sum of the first three primes"], Bold]}], 
+                    Background -> RGBColor[1, 
+                    Rational[1, 3], 
+                    Rational[1, 3]], FrameStyle -> None], 
+                    Grid[{{"Tested:", 
+                    HoldForm[
+                    Apply[Plus, 
+                    Map[Prime, 
+                    Range[3]]]]}, {{"Evaluated:", 10}}, {"Expected:", 37}, {
+                    "Written:", 
+                    HoldForm[2 + 35]}}, Alignment -> {{Right, Left}}]}, True], 
+                    OpenerView[{
+                    Framed[
+                    Overlay[{
+                    Style["Some serious square root", Bold], 
+                    Style[
+                    Invisible["Sum of the first three primes"], Bold]}], 
+                    Background -> RGBColor[1, 
+                    Rational[1, 3], 
+                    Rational[1, 3]], FrameStyle -> None], 
+                    Grid[{{"Tested:", 
+                    HoldForm[
+                    Sqrt[$CellContext`x^2]]}, {{
+                    "Evaluated:", ($CellContext`x^2)^Rational[1, 2]}}, {
+                    "Expected:", 
+                    PlusMinus[$CellContext`x]}}, 
+                    Alignment -> {{Right, Left}}]}, True]}]}, False]],
+                 DynamicModuleValues:>{}],
+                Setting[#, {0}]& ]},
+              {
+               TagBox[
+                DynamicModuleBox[{Typeset`var$$ = True}, 
+                 InterpretationBox[
+                  StyleBox[
+                   PaneSelectorBox[{False->GridBox[{
+                    {
+                    OpenerBox[Dynamic[Typeset`var$$],
+                    Appearance->Automatic,
+                    AutoAction->False,
+                    ContinuousAction->False,
+                    Enabled->Automatic], "\<\"Passed Tests\"\>"}
+                    },
+                    AutoDelete->False,
+                    BaselinePosition->{1, 1},
+                    GridBoxAlignment->{"Columns" -> {{Left}}},
+                    GridBoxBackground->{"Columns" -> {{Automatic}}},
+                    
+                    GridBoxItemSize->{
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+                    GridBoxSpacings->{
+                    "Columns" -> {{0.2}}, "Rows" -> {{0.5}}}], True->GridBox[{
+                    {
+                    OpenerBox[Dynamic[Typeset`var$$],
+                    Appearance->Automatic,
+                    AutoAction->False,
+                    ContinuousAction->False,
+                    Enabled->Automatic], "\<\"Passed Tests\"\>"},
+                    {"", 
+                    PaneBox[
+                    TagBox[GridBox[{
+                    {
+                    TagBox[
+                    DynamicModuleBox[{Typeset`var$$ = True}, 
+                    InterpretationBox[
+                    StyleBox[
+                    PaneSelectorBox[{False->GridBox[{
+                    {
+                    OpenerBox[Dynamic[Typeset`var$$],
+                    Appearance->Automatic,
+                    AutoAction->False,
+                    ContinuousAction->False,
+                    Enabled->Automatic], 
+                    FrameBox[
+                    OverlayBox[{
+                    StyleBox["\<\"Sum of the first two primes\"\>",
+                    StripOnInput->False,
+                    FontWeight->Bold], 
+                    StyleBox[
+                    StyleBox["\<\"Sum of the first two primes\"\>",
+                    StripOnInput->False,
+                    ShowContents->False],
+                    StripOnInput->False,
+                    FontWeight->Bold]}],
+                    Background->RGBColor[0, 
+                    Rational[2, 3], 0],
+                    FrameStyle->None,
+                    StripOnInput->False]}
+                    },
+                    AutoDelete->False,
+                    BaselinePosition->{1, 1},
+                    GridBoxAlignment->{"Columns" -> {{Left}}},
+                    GridBoxBackground->{"Columns" -> {{Automatic}}},
+                    GridBoxItemSize->{
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+                    
+                    GridBoxSpacings->{
+                    "Columns" -> {{0.2}}, "Rows" -> {{0.5}}}], True->GridBox[{
+                    {
+                    OpenerBox[Dynamic[Typeset`var$$],
+                    Appearance->Automatic,
+                    AutoAction->False,
+                    ContinuousAction->False,
+                    Enabled->Automatic], 
+                    FrameBox[
+                    OverlayBox[{
+                    StyleBox["\<\"Sum of the first two primes\"\>",
+                    StripOnInput->False,
+                    FontWeight->Bold], 
+                    StyleBox[
+                    StyleBox["\<\"Sum of the first two primes\"\>",
+                    StripOnInput->False,
+                    ShowContents->False],
+                    StripOnInput->False,
+                    FontWeight->Bold]}],
+                    Background->RGBColor[0, 
+                    Rational[2, 3], 0],
+                    FrameStyle->None,
+                    StripOnInput->False]},
+                    {"", 
+                    PaneBox[
+                    TagBox[GridBox[{
+                    {"\<\"Tested:\"\>", 
+                    TagBox[
+                    RowBox[{"Plus", "@@", 
+                    RowBox[{"Prime", "/@", 
+                    RowBox[{"Range", "[", "2", "]"}]}]}],
+                    HoldForm]},
+                    {"\<\"Expected:\"\>", "5"}
+                    },
+                    AutoDelete->False,
+                    GridBoxAlignment->{"Columns" -> {Right, Left}},
+                    
+                    GridBoxItemSize->{"Columns" -> {{Automatic}}, 
+                    "Rows" -> {{Automatic}}}],
+                    "Grid"],
+                    ImageMargins->0]}
+                    },
+                    AutoDelete->False,
+                    BaselinePosition->{1, 1},
+                    GridBoxAlignment->{"Columns" -> {{Left}}},
+                    GridBoxBackground->{"Columns" -> {{Automatic}}},
+                    
+                    GridBoxItemSize->{
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+                    
+                    GridBoxSpacings->{
+                    "Columns" -> {{0.2}}, "Rows" -> {{0.5}}}]}, Dynamic[
+                    Typeset`var$$],
+                    Alignment->Automatic,
+                    BaselinePosition->Baseline,
+                    DefaultBaseStyle->"OpenerView",
+                    ImageMargins->0,
+                    ImageSize->Automatic],
+                    Deployed->False,
+                    StripOnInput->False],
+                    OpenerView[{
+                    Framed[
+                    Overlay[{
+                    Style["Sum of the first two primes", Bold], 
+                    Style[
+                    Invisible["Sum of the first two primes"], Bold]}], 
+                    Background -> RGBColor[0, 
+                    Rational[2, 3], 0], FrameStyle -> None], 
+                    Grid[{{"Tested:", 
+                    HoldForm[
+                    Apply[Plus, 
+                    Map[Prime, 
+                    Range[2]]]]}, {"Expected:", 5}}, 
+                    Alignment -> {{Right, Left}}]}, False]],
+                    DynamicModuleValues:>{}],
+                    Setting[#, {0}]& ]}
+                    },
+                    GridBoxAlignment->{"Columns" -> {{Left}}},
+                    
+                    GridBoxItemSize->{
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+                    "Column"],
+                    ImageMargins->0]}
+                    },
+                    AutoDelete->False,
+                    BaselinePosition->{1, 1},
+                    GridBoxAlignment->{"Columns" -> {{Left}}},
+                    GridBoxBackground->{"Columns" -> {{Automatic}}},
+                    GridBoxItemSize->{
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+                    
+                    GridBoxSpacings->{
+                    "Columns" -> {{0.2}}, "Rows" -> {{0.5}}}]}, Dynamic[
+                    Typeset`var$$],
+                    Alignment->Automatic,
+                    BaselinePosition->Baseline,
+                    DefaultBaseStyle->"OpenerView",
+                    ImageMargins->0,
+                    ImageSize->Automatic],
+                   Deployed->False,
+                   StripOnInput->False],
+                  OpenerView[{"Passed Tests", 
+                    Column[{
+                    OpenerView[{
+                    Framed[
+                    Overlay[{
+                    Style["Sum of the first two primes", Bold], 
+                    Style[
+                    Invisible["Sum of the first two primes"], Bold]}], 
+                    Background -> RGBColor[0, 
+                    Rational[2, 3], 0], FrameStyle -> None], 
+                    Grid[{{"Tested:", 
+                    HoldForm[
+                    Apply[Plus, 
+                    Map[Prime, 
+                    Range[2]]]]}, {"Expected:", 5}}, 
+                    Alignment -> {{Right, Left}}]}, False]}]}, False]],
+                 DynamicModuleValues:>{}],
+                Setting[#, {0}]& ]}
+             },
+             GridBoxAlignment->{"Columns" -> {{Left}}},
+             
+             GridBoxItemSize->{
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+            "Column"],
+           ImageMargins->0]}
+        },
+        AutoDelete->False,
+        BaselinePosition->{1, 1},
+        GridBoxAlignment->{"Columns" -> {{Left}}},
+        GridBoxBackground->{"Columns" -> {{Automatic}}},
+        GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+        GridBoxSpacings->{"Columns" -> {{0.2}}, "Rows" -> {{0.5}}}]}, Dynamic[
+       Typeset`var$$],
+       Alignment->Automatic,
+       BaselinePosition->Baseline,
+       DefaultBaseStyle->"OpenerView",
+       ImageMargins->0,
+       ImageSize->Automatic],
+      Deployed->False,
+      StripOnInput->False],
+     OpenerView[{
+       Row[{
+         Spacer[2], 
+         Text[
+          Style["Unit Test Report", Bold, 18]]}], 
+       Column[{
+         OpenerView[{"Failed Tests", 
+           Column[{
+             OpenerView[{
+               Framed[
+                Overlay[{
+                  Style["Sum of the first three primes", Bold], 
+                  Style[
+                   Invisible["Sum of the first three primes"], Bold]}], 
+                Background -> RGBColor[1, 
+                  Rational[1, 3], 
+                  Rational[1, 3]], FrameStyle -> None], 
+               Grid[{{"Tested:", 
+                  HoldForm[
+                   Apply[Plus, 
+                    Map[Prime, 
+                    Range[3]]]]}, {{"Evaluated:", 10}}, {"Expected:", 37}, {
+                 "Written:", 
+                  HoldForm[2 + 35]}}, Alignment -> {{Right, Left}}]}, True], 
+             OpenerView[{
+               Framed[
+                Overlay[{
+                  Style["Some serious square root", Bold], 
+                  Style[
+                   Invisible["Sum of the first three primes"], Bold]}], 
+                Background -> RGBColor[1, 
+                  Rational[1, 3], 
+                  Rational[1, 3]], FrameStyle -> None], 
+               Grid[{{"Tested:", 
+                  HoldForm[
+                   Sqrt[$CellContext`x^2]]}, {{
+                  "Evaluated:", ($CellContext`x^2)^Rational[1, 2]}}, {
+                 "Expected:", 
+                  PlusMinus[$CellContext`x]}}, Alignment -> {{Right, Left}}]},
+               True]}]}], 
+         OpenerView[{"Passed Tests", 
+           Column[{
+             OpenerView[{
+               Framed[
+                Overlay[{
+                  Style["Sum of the first two primes", Bold], 
+                  Style[
+                   Invisible["Sum of the first two primes"], Bold]}], 
+                Background -> RGBColor[0, 
+                  Rational[2, 3], 0], FrameStyle -> None], 
+               Grid[{{"Tested:", 
+                  HoldForm[
+                   Apply[Plus, 
+                    Map[Prime, 
+                    Range[2]]]]}, {"Expected:", 5}}, 
+                Alignment -> {{Right, Left}}]}, False]}]}]}]}, False]],
+    DynamicModuleValues:>{}],
+   Setting[#, {0}]& ],
+  Deploy,
+  DefaultBaseStyle->{Deployed -> True}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"TestMyApp", "@", "\"\<Oops\>\""}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"\<\"Error\"\>", "[", 
+  TemplateBox[{
+   "\"No test file:\"",
+    "\"C:\\\\Users\\\\Lenovo\\\\AppData\\\\Roaming\\\\Mathematica\\\\\
+Applications\\\\SimpleUnitTestingTesting\\\\Tests\\\\Oops.mt\""},
+   "Row",
+   DisplayFunction->(RowBox[{#, "  ", #2}]& ),
+   InterpretationFunction->(RowBox[{"Row", "[", 
+      RowBox[{
+        RowBox[{"{", 
+          RowBox[{#, ",", #2}], "}"}], ",", "\"  \""}], "]"}]& )], 
+  "]"}]], "Output"]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -829,8 +1521,8 @@ Cell["User Domain", "Subtitle",
 }, Open  ]]
 },
 InitializationCellEvaluation->True,
-WindowSize->{712, 575},
-WindowMargins->{{232, Automatic}, {Automatic, 44}},
+WindowSize->{732, 641},
+WindowMargins->{{232, Automatic}, {Automatic, 7}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 FrontEndVersion->"8.0 for Microsoft Windows (64-bit) (February 23, 2011)",

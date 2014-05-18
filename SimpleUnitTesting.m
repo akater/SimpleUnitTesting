@@ -5,7 +5,7 @@
 
 
 (* ::Subsubtitle:: *)
-(*v14.05.17 (latest review by maintainer)*)
+(*v14.05.18 (latest review by maintainer)*)
 
 
 (* ::Text:: *)
@@ -169,16 +169,15 @@ OpenerView[#, !passedQ]& @
   , Background -> If[passedQ, Darker@Green, Lighter@Red]
   , FrameStyle -> None]
 , { {   "Tested:" , First@Cases[tr, Test@x_ :> HoldForm@x, {1}, 1] }
+  , If[passedQ
+    ,  ##&[]
+    ,  {"Evaluated:", evaluatedTestExpression}]
   , { "Expected:" , If[passedQ
                     ,  evaluatedTestExpression
                     ,  ReleaseHold@expected] }
   , If[(!passedQ && HoldForm@Evaluate@ReleaseHold@expected =!= expected)|| OptionValue@"Always show originals"
     ,  { "Written:" , expected }
-    ,  ##&[]] }
-  ~Join~
-  If[passedQ
-  ,  {}
-  ,  {{"Evaluated:", evaluatedTestExpression}}] //
+    ,  ##&[]] } //
   Grid[#, Alignment -> {{Right, Left}}]& }]
 
 
